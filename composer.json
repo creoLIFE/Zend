@@ -1,0 +1,11 @@
+{
+    "name": "creoLIFE/Zend",
+    "type": "library",
+    "description": "Zend Framework Libraries",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/creoLIFE/Zend.git"
+        }
+    ]
+}
