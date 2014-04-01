@@ -10,6 +10,5 @@
     ],
     "autoload": {
 		"creoLIFE_Zend_Orm": "Orm/"
-    },
-
+    }
 }
