@@ -9,6 +9,8 @@
         }
     ],
     "autoload": {
-		"creoLIFE_Zend_Orm": "Orm/"
+    	"psr-0": {
+			"creoLIFE_Zend_Orm": "Orm/"
+		}
     }
 }
