@@ -7,5 +7,9 @@
             "type": "git",
             "url": "https://github.com/creoLIFE/Zend.git"
         }
-    ]
+    ],
+    "autoload": {
+		"creoLIFE_Zend_Orm": "Orm/"
+    },
+
 }
