@@ -10,8 +10,8 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-    	"psr-4": {
-			"Zf_": "Zf/Orm/"
+    	"classmap": {
+			"Zf_": "Zf/"
 		}
     }
 }
