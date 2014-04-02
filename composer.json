@@ -8,6 +8,7 @@
             "url": "https://github.com/creoLIFE/Zend.git"
         }
     ],
+    "minimum-stability": "stable",
     "autoload": {
     	"psr-0": {
 			"Zf_Orm_": "Orm/"
