@@ -10,7 +10,7 @@
     ],
     "autoload": {
     	"psr-0": {
-			"Orm": "Orm/"
+			"Zf_Orm_": "Orm/"
 		}
     }
 }
