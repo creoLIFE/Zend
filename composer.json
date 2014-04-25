@@ -11,7 +11,8 @@
     "minimum-stability": "stable",
     "autoload": {
     	"classmap": {
-			"Zf_": "Zf/"
+			"Zf_": "Zf/",
+			"Main_": "Main/"
 		}
     }
 }
