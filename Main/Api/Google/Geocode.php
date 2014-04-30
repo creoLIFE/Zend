@@ -62,10 +62,22 @@ class Main_Api_Google_Geocode
 			//debug($query);
 
 	    	$this->json = @file_get_contents( $query );
-	    	$this->result = json_decode($this->json);
-	    	debug($this->result);
+	    	$decoded = json_decode($this->json);
+	    	
+	    	if( isset($decoded->status) && $decoded->status !== 'ZERO_RESULTS' ){
+	    		$this->result = $decoded->results[0];
+	    	}
 		}
     }
+
+    /**
+    * Method will get full response JSON object
+    * @method getResultJson
+    * @return float
+    */
+    public function getResultJson(){
+    	return $this->json;
+	}
 
     /**
     * Method will get lattitude from response
@@ -73,10 +85,7 @@ class Main_Api_Google_Geocode
     * @return float
     */
     public function getLattitude(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	return isset($result->geometry->location->lat) ? $result->geometry->location->lat : null;
+    	return isset($this->result->geometry->location->lat) ? $this->result->geometry->location->lat : null;
 	}
 
     /**
@@ -85,10 +94,7 @@ class Main_Api_Google_Geocode
     * @return float
     */
     public function getLongitude(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	return isset($result->geometry->location->lng) ? $result->geometry->location->lng : null;
+    	return isset($this->result->geometry->location->lng) ? $this->result->geometry->location->lng : null;
 	}
 
     /**
@@ -97,10 +103,7 @@ class Main_Api_Google_Geocode
     * @return string
     */
     public function getStreetLongName(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	foreach( $result->address_components as $a ){
+    	foreach( $this->result->address_components as $a ){
     		if( $a->types[0] === 'route' ){
     			return $a->long_name;
     		}
@@ -115,10 +118,7 @@ class Main_Api_Google_Geocode
     * @return string
     */
     public function getStreetShortName(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	foreach( $result->address_components as $a ){
+    	foreach( $this->result->address_components as $a ){
     		if( $a->types[0] === 'route' ){
     			return $a->short_name;
     		}
@@ -133,10 +133,7 @@ class Main_Api_Google_Geocode
     * @return string
     */
     public function getSublocalityLongName(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	foreach( $result->address_components as $a ){
+    	foreach( $this->result->address_components as $a ){
     		if( $a->types[0] === 'sublocality' ){
     			return $a->long_name;
     		}
@@ -151,10 +148,7 @@ class Main_Api_Google_Geocode
     * @return string
     */
     public function getSublocalityShortName(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	foreach( $result->address_components as $a ){
+    	foreach( $this->result->address_components as $a ){
     		if( $a->types[0] === 'sublocality' ){
     			return $a->short_name;
     		}
@@ -169,10 +163,7 @@ class Main_Api_Google_Geocode
     * @return string
     */
     public function getLocalityLongName(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	foreach( $result->address_components as $a ){
+    	foreach( $this->result->address_components as $a ){
     		if( $a->types[0] === 'locality' ){
     			return $a->long_name;
     		}
@@ -187,10 +178,7 @@ class Main_Api_Google_Geocode
     * @return string
     */
     public function getLocalityShortName(){
-    	//Define
-    	$result = $this->result->results[0];
-
-    	foreach( $result->address_components as $a ){
+    	foreach( $this->result->address_components as $a ){
     		if( $a->types[0] === 'locality' ){
     			return $a->short_name;
     		}
