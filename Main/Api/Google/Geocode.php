@@ -7,9 +7,9 @@
  * @since 2014-04-25
  * @license The MIT License (MIT)
  * @copyright 2014 creoLIFE.pl
-	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 defined("_APP_ACCESS") or die(header("HTTP/1.0 404 Not Found"));
 
@@ -49,7 +49,7 @@ class Main_Api_Google_Geocode
     $addressValidator = new Zend_Validate_Regex(array('pattern' => '/[a-zA-Z0-9\s\-\_\,]+/'));
     $languageValidator = new Zend_Validate_Regex(array('pattern' => '/[a-z]{,3}/'));
 
-		if ( !$languageValidator->isValid( $language )) {
+    if ( !$languageValidator->isValid( $language )) {
       $this->urlParams['language'] = $language;
     }
 
@@ -75,13 +75,13 @@ class Main_Api_Google_Geocode
     return $this->json;
   }
 
-    /**
+  /**
     * Method will get lattitude from response
     * @method getLattitude
     * @return float
     */
   public function getLattitude(){
-   	return isset($this->result->geometry->location->lat) ? $this->result->geometry->location->lat : null;
+    return isset($this->result->geometry->location->lat) ? $this->result->geometry->location->lat : null;
   }
 
   /**
@@ -90,7 +90,7 @@ class Main_Api_Google_Geocode
     * @return float
     */
   public function getLongitude(){
-   	return isset($this->result->geometry->location->lng) ? $this->result->geometry->location->lng : null;
+    return isset($this->result->geometry->location->lng) ? $this->result->geometry->location->lng : null;
   }
 
   /**
@@ -99,12 +99,12 @@ class Main_Api_Google_Geocode
     * @return string
     */
   public function getStreetLongName(){
-  	foreach( $this->result->address_components as $a ){
-  		if( $a->types[0] === 'route' ){
-  			return $a->long_name;
+    foreach( $this->result->address_components as $a ){
+      if( $a->types[0] === 'route' ){
+        return $a->long_name;
       }
     }
-  	return null;
+    return null;
   }
 
   /**
@@ -114,8 +114,8 @@ class Main_Api_Google_Geocode
     */
   public function getStreetShortName(){
     foreach( $this->result->address_components as $a ){
-    	if( $a->types[0] === 'route' ){
-    		return $a->short_name;
+      if( $a->types[0] === 'route' ){
+        return $a->short_name;
       }
     }
     return null;
@@ -127,13 +127,13 @@ class Main_Api_Google_Geocode
     * @return string
     */
   public function getSublocalityLongName(){
-  	foreach( $this->result->address_components as $a ){
-  		if( $a->types[0] === 'sublocality' ){
-  			return $a->long_name;
+    foreach( $this->result->address_components as $a ){
+      if( $a->types[0] === 'sublocality' ){
+        return $a->long_name;
       }
     }
-   	return null;
-	}
+      return null;
+  }
 
   /**
     * Method will get streen short name
@@ -142,12 +142,12 @@ class Main_Api_Google_Geocode
     */
   public function getSublocalityShortName(){
     foreach( $this->result->address_components as $a ){
-    	if( $a->types[0] === 'sublocality' ){
-    		return $a->short_name;
+      if( $a->types[0] === 'sublocality' ){
+        return $a->short_name;
       }
     }
     return null;
-	}
+  }
 
   /**
     * Method will get streen short name
@@ -156,12 +156,12 @@ class Main_Api_Google_Geocode
     */
   public function getLocalityLongName(){
     foreach( $this->result->address_components as $a ){
-    	if( $a->types[0] === 'locality' ){
-    		return $a->long_name;
+      if( $a->types[0] === 'locality' ){
+        return $a->long_name;
       }
     }
     return null;
-	}
+  }
 
   /**
     * Method will get streen short name
@@ -170,8 +170,8 @@ class Main_Api_Google_Geocode
     */
   public function getLocalityShortName(){
     foreach( $this->result->address_components as $a ){
-    	if( $a->types[0] === 'locality' ){
-    		return $a->short_name;
+      if( $a->types[0] === 'locality' ){
+        return $a->short_name;
       }
     }
     return null;
