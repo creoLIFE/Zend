@@ -2,17 +2,30 @@
     "name": "creoLIFE/Zend",
     "type": "library",
     "description": "creoLIFE Zend Framework Libraries",
+    "keywords": ["Zend", "Zend libraries", "Zend Api","Zend Google Api", "Google Maps Api", "Google Maps Geocode", "Google lattitude longitude", "longitude api", "lattitude api", "Geocode REST", "Google Maps REST"],
+    "homepage":"http://www.creolife.pl",
+    "time":"2014-05-12",
     "version":"1.0.0",
+    "license":"MIT",
+    "authors": [
+        {
+            "name": "Miroslaw Ratman",
+            "email": "office@creolife.info",
+            "homepage": "http://www.creolife.pl",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "repositories": [
         {
             "type": "git",
             "url": "https://github.com/creoLIFE/Zend.git"
         }
     ],
-    "minimum-stability": "stable",
     "autoload": {
-    	"classmap": {
-			"Main_": "Main/"
-		}
+        "classmap": {
+            "Main_": "Main/"
+        }
     }
 }
