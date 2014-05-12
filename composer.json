@@ -1,7 +1,8 @@
 {
     "name": "creoLIFE/Zend",
     "type": "library",
-    "description": "Zend Framework Libraries",
+    "description": "creoLIFE Zend Framework Libraries",
+    "version":"1.0.0",
     "repositories": [
         {
             "type": "git",
@@ -11,7 +12,6 @@
     "minimum-stability": "stable",
     "autoload": {
     	"classmap": {
-			"Zf_": "Zf/",
 			"Main_": "Main/"
 		}
     }
