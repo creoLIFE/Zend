@@ -3,7 +3,7 @@
  * Helper for Google API Geocodes
  * @package Main_Api_Google
  * @author Mirek Ratman
- * @version 1.0
+ * @version 1.0.1
  * @since 2014-04-25
  * @license The MIT License (MIT)
  * @copyright 2014 creoLIFE.pl
@@ -64,15 +64,6 @@ class Main_Api_Google_Geocode
         $this->result = $decoded->results[0];
       }
     }
-  }
-
-  /**
-    * Method will get full response JSON object
-    * @method getResultJson
-    * @return float
-    */
-  public function getResultJson(){
-    return $this->json;
   }
 
   /**
@@ -175,6 +166,33 @@ class Main_Api_Google_Geocode
       }
     }
     return null;
+  }
+
+  /**
+    * Method will get full response JSON object
+    * @method getResultJson
+    * @deprecated 1.0.1 - changed to method self::asJson()
+    * @return string
+    */
+  public function getResultJson(){
+  }
+
+  /**
+    * Method will get full response JSON object
+    * @method asJson
+    * @return string
+    */
+  public function asJson(){
+    return $this->json;
+  }
+
+  /**
+    * Method will get full response as array
+    * @method asArray
+    * @return array
+    */
+  public function asArray(){
+    return $this->result;
   }
 
 }
