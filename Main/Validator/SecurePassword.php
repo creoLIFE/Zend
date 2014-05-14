@@ -7,7 +7,7 @@
  * @license The MIT License (MIT)
  */
 
-class My_Validator_SecurePassword extends Zend_Validate_Abstract
+class Main_Validator_SecurePassword extends Zend_Validate_Abstract
 {
     const ALL_WHITESPACE = 'allWhitespace';
     const NOT_LONG       = 'notLong';
