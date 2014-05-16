@@ -44,7 +44,7 @@ class Main_User_Info
 		if( $hostname ){
 			$hostName = gethostbyname($hostname);
 		}
-		return self::getIp() === '127.0.0.1' ? 'localhost' : gethostbyaddr( self::getIp() );
+		return self::getIp() == '127.0.0.1' ? 'localhost' : gethostbyaddr( self::getIp() );
 	}
 
 }
