@@ -42,9 +42,9 @@ class Main_User_Info
 	*/
 	public static function getHostname( $hostname = false ){
 		if( $hostname ){
-			return gethostbyname($hostname);
+			$hostName = gethostbyname($hostname);
 		}
-		return gethostbyaddr( self::getIp() );
+		return self::getIp() === '127.0.0.1' ? 'localhost' : gethostbyaddr( self::getIp() );
 	}
 
 }
