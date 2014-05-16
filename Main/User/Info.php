@@ -15,7 +15,7 @@ class Main_User_Info
 	* @method getIp
 	* @return string
 	*/
-	public function getIp(){
+	public static function getIp(){
 		
 		$remoteAddr = $_SERVER["REMOTE_ADDR"];
 
@@ -37,10 +37,10 @@ class Main_User_Info
 	/**
 	* Get user hostname information from IP
 	* @method getHostname
-	* @param string $hostname - user hostname
+	* @param string $hostname - user hostname to decode
 	* @return string
 	*/
-	public function getHostname( $hostname = false ){
+	public static function getHostname( $hostname = false ){
 		if( $hostname ){
 			return gethostbyname($hostname);
 		}
