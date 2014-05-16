@@ -44,7 +44,7 @@ class Main_User_Info
 		if( $hostname ){
 			return gethostbyname($hostname);
 		}
-		return gethostbyaddr( $this->getIp() );
+		return gethostbyaddr( self::getIp() );
 	}
 
 }
