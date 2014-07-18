@@ -429,9 +429,9 @@ class Creo_Http_Useragent
 	/**
 	* Get random browser user agent
 	* @method getRandomUserAgent
-	* @return string:
+	* @return string
 	*/
-	public function getRandomUserAgent(){
+	public static function getRandomUserAgent(){
 		$max = 0;
 		$rcount = 0;
 		$browser_type = '';
