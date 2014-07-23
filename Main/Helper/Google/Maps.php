@@ -32,8 +32,8 @@ class Main_Helper_Google_Maps
             'maxLat' => (float) $lat + rad2deg($distance / $radius),
             'minLat'=> (float) $lat - rad2deg($distance / $radius),
             // longitude boundaries (longitude gets smaller when latitude increases)
-            'maxLng' => (float) $lon + rad2deg($distance / $radius / cos(deg2rad((float) $lat))),
-            'minLng' => (float) $lon - rad2deg($distance / $radius / cos(deg2rad((float) $lat)))
+            'maxLon' => (float) $lon + rad2deg($distance / $radius / cos(deg2rad((float) $lat))),
+            'minLon' => (float) $lon - rad2deg($distance / $radius / cos(deg2rad((float) $lat)))
         );
    	}
 
