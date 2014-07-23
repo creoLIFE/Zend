@@ -20,10 +20,10 @@ class Main_Helper_Google_Maps
     * @method getMinMaxNearby
     * @param [float] $lon - longitude of given location
     * @param [float] $lat - lattitude of given location
-    * @param [int] $distance - max distance from given point
+    * @param [string] $distance - max distance from given point
     * @return string
     */
-    public function getMinMaxNearby( $lat, $lon, $distance = 5, $unit = 'km' ){
+    public function getMinMaxNearby( $lon, $lat, $distance = 5, $unit = 'km' ){
         if ($unit == 'km') $radius = 6371.009; // in kilometers
         elseif ($unit == 'mi') $radius = 3958.761; // in miles
 
@@ -32,8 +32,8 @@ class Main_Helper_Google_Maps
             'maxLat' => (float) $lat + rad2deg($distance / $radius),
             'minLat'=> (float) $lat - rad2deg($distance / $radius),
             // longitude boundaries (longitude gets smaller when latitude increases)
-            'maxLng' => (float) $lng + rad2deg($distance / $radius / cos(deg2rad((float) $lat))),
-            'minLng' => (float) $lng - rad2deg($distance / $radius / cos(deg2rad((float) $lat)))
+            'maxLng' => (float) $lon + rad2deg($distance / $radius / cos(deg2rad((float) $lat))),
+            'minLng' => (float) $lon - rad2deg($distance / $radius / cos(deg2rad((float) $lat)))
         );
    	}
 
@@ -44,7 +44,7 @@ class Main_Helper_Google_Maps
     * @param [float] $lat1 - lattitude of given main location
     * @param [float] $lon2 - longitude of given 2nd location
     * @param [float] $lat2 - lattitude of given 2nd location
-    * @param [int] $distance - max distance from given point
+    * @param [string] $distance - max distance from given point
     * @return string
     */
     public static function getDistance($lon1, $lat1, $lon2, $lat2, $unit = 'km')
