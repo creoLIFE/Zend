@@ -24,7 +24,7 @@ class Main_Dom_Parser
     * Class constructor
     * @method __construct
     */
-    static public function __construct( $parser = 'simple_html_dom') {
+    public function __construct( $parser = 'simple_html_dom') {
         try{
             switch( $parser ){
                 case "simple_html_dom":
