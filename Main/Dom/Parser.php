@@ -31,7 +31,7 @@ class Main_Dom_Parser
                     $this->parser = new Main_Dom_Simplehtmldom;
                 break;
                 case "domxpath":
-                    $this->parser new Main_Dom_Domxpath;
+                    $this->parser = new Main_Dom_Domxpath;
                 break;
             }
         }
