@@ -16,12 +16,12 @@ defined("_APP_ACCESS") or die(header('HTTP/1.0 404 Not Found'));
 
 class Main_Http_Headers extends Main_Http_Useragent
 {
-	/**
-	* Get random header info for browser
-	* @method getRandomHeaderAsArray
-	* @return array
-	*/
-	public function getRandomHeaderAsArray(){
+  /**
+  * Get random header info for browser
+  * @method getRandomHeaderAsArray
+  * @return array
+  */
+  public function getRandomHeaderAsArray(){
             return array(
                   'User-Agent: ' . parent::getRandomUserAgent(),
                   'Accept-encoding: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -29,21 +29,21 @@ class Main_Http_Headers extends Main_Http_Useragent
                   'Accept-Encoding: gzip, deflate',
                   'Connection: keep-alive'
             );
-	}
+  }
 
-      /**
-      * Get random header info for browser
-      * @method getRandomHeaderAsString
-      * @return string
-      */
-      public function getRandomHeaderAsString(){
-            return join("\n", array(
-                'User-Agent: ' . parent::getRandomUserAgent(),
-                'Accept-encoding: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Language: en-gb,en;q=0.5',
-                'Accept-Encoding: gzip, deflate',
-                'Connection: keep-alive'
-            ));
-      }
+  /**
+  * Get random header info for browser
+  * @method getRandomHeaderAsString
+  * @return string
+  */
+  public function getRandomHeaderAsString(){
+        return join("\n", array(
+            'User-Agent: ' . parent::getRandomUserAgent(),
+            'Accept-encoding: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language: en-gb,en;q=0.5',
+            'Accept-Encoding: gzip, deflate',
+            'Connection: keep-alive'
+        ));
+  }
 
 }

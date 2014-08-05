@@ -1,9 +1,9 @@
 <?php
 /**
- * Dom parser wrapper
+ * DOMXPath parser wrapper
  * @package Main_Dom
  * @author Mirek Ratman
- * @version 1.0.3
+ * @version 1.0.0
  * @since 2014-07-31
  * @license The MIT License (MIT)
  * @copyright 2014 creoLIFE.pl
@@ -12,32 +12,31 @@
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-class Main_Dom_Parser
+class Main_Dom_Domxpath
 {
 
     /**
-    * @var $parserType - type of parser (supported: simple_html_dom, DOMXPath)
+    * Method will execute file_get_html() function from Simple_Html_Dom
+    * @method getHtmlFromFile
+    * @param string $fileName - name of file to read
+    * @return mixed
     */
-    public $parser;
+    static public function getHtmlFromFile( $fileName ) {
+        $doc = new DOMDocument();
+        $doc->loadHTMLFile($fileName);
+        return new DOMXpath($doc);
+    }
 
     /**
-    * Class constructor
-    * @method __construct
+    * Method will execute str_get_html() function from Simple_Html_Dom
+    * @method getHtmlFromString
+    * @param string $string - string to read
+    * @return mixed
     */
-    static public function __construct( $parser = 'simple_html_dom') {
-        try{
-            switch( $parser ){
-                case "simple_html_dom":
-                    $this->parser = new Main_Dom_Simplehtmldom;
-                break;
-                case "domxpath":
-                    $this->parser new Main_Dom_Domxpath;
-                break;
-            }
-        }
-        catch( Exception $e){
-            print_r($e);
-        }
+    static public function getHtmlFromString( $string ) {
+        $doc = new DOMDocument();
+        $doc->loadHTML($string);
+        return new DOMXpath($doc);
     }
 }
 
