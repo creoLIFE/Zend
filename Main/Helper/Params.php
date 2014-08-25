@@ -55,7 +55,11 @@ class Main_Helper_Params
     * @return [boolean]
     */
     private function validate( $val, $reg ){
-        $validator = new Zend_Validate_Regex(array('pattern' => $reg ));
+        if( !isset($reg['pattern']) ){
+            $reg = array('pattern' => $reg );    
+        }
+
+        $validator = new Zend_Validate_Regex( $reg );
         if ($validator->isValid( $val )) {
             return true;
         } else {
