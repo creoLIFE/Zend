@@ -118,6 +118,7 @@ class Main_Paginator
 				$page = $page < 1 ? 1 : ($page >= $lastPage ? $lastPage : $page);
 				$this->current['type'] = 'link';
 				$this->current['page'] = $page;
+				$this->current['realPage'] = $page - 1;
 				$this->current['title'] = $page;
 				$this->current['current'] = 1;
 
