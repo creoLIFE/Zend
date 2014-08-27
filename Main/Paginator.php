@@ -66,6 +66,12 @@ class Main_Paginator
 	public $countPages;
 
 	/**
+	* go to page functionality
+	* @var [boolean]
+	*/
+	public $goToPage = false;
+
+	/**
 	* Class constructor
 	* @param [integer] $limit - set numbers of elements per page
 	* @param [integer] $page - set current page
