@@ -1,8 +1,13 @@
 <?php
 /**
-* class Main_Io
-* Class provide extended I/O functionality
-*/
+ * class Main_Io
+ * Class provide extended I/O functionality
+ * @category Main
+ * @package Main_Paginator
+ * @copyright Copyright (c) 2006-2012 creoLIFE
+ * @author Mirek Ratman
+ * @version 1.1
+ */
 
 class Main_Io
 {
