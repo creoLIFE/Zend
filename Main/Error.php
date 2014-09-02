@@ -13,20 +13,28 @@ class Main_Error
 
     /**
      * Method will "beautify" exception info
-     * @param string $exception - exception object
+     * @param string $e - exception object
      * @return string
      */
-    static public function display( $exception ){
-        $out = array();
+    static public function display( $e ){
+        $out = new StdClass;
 
-        $out[] = 'Message: ' . empty($exception->exception->getMessage()) ? 'No message defined' : $exception->exception->getMessage();
-        $out[] = '<hr>';
-        $out[] = 'Module: ' . empty($exception->request->getModuleName()) ? 'No module defined' : $exception->request->getModuleName();
-        $out[] = 'Controller: ' . empty($exception->request->getControllerName()) ? 'No controller defined' : $exception->request->getControllerName();
-        $out[] = 'Action: ' . empty($exception->request->getActionName()) ? 'No action defined' : $exception->request->getActionName();
-        $out[] = '<hr>';
-        $out[] = 'Error object: ' . $exception;
+        $tmp[] = 'Message: ' . $e->exception->getMessage();
+        $tmp[] = '<hr>';
+        $tmp[] = 'Module: ' . $e->request->getModuleName();
+        $tmp[] = 'Controller: ' . $e->request->getControllerName();
+        $tmp[] = 'Action: ' . $e->request->getActionName();
+        $tmp[] = 'File: ' . $e->exception->getFile();
+        $tmp[] = 'Line: ' . $e->exception->getLine();
+        $tmp[] = 'Code: ' . $e->exception->getCode();
+        $tmp[] = '<hr>';
+        $tmp[] = 'Trace:';
+        $tmp[] = $e->exception->getTraceAsString();
+        $tmp[] = '<hr>';
 
-		return implode('<br/>',$out);
+		$out->info = implode('<br/>',$tmp);
+        $out->details = $e;
+
+        return $out;
 	}
 }
