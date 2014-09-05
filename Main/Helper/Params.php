@@ -40,7 +40,7 @@ class Main_Helper_Params
     public function getParam( $name, $reg = null, $alternative = null ){
     	$param = isset($this->params[ $name ]) && $this->params[ $name ] !== null && $this->params[ $name ] !== '' ? $this->params[ $name ] : ( $alternative !== null ? $alternative : '' );
         if( $reg !== null ){
-            return self::validate( $param ) ? $param : null;
+            return self::validate( $param ) ? $param : false;
         } else {
             return $param;
         }
