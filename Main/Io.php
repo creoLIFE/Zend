@@ -171,11 +171,11 @@ class Main_Io
 			return false;
 		}
 
-		$out = null;
+		$out = 'sep=' . $glue . "\n";
 
         //implode description info from array
         if( $description ){
-    		$out = implode($glue, $description)."\n";
+    		$out .= implode($glue, $description)."\n";
         }
 
         //implode data info from array

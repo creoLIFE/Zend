@@ -72,14 +72,21 @@ class Main_Paginator
 	public $goToPage = false;
 
 	/**
+	* Zend_Router definition for paginator URLs
+	* @var [string]
+	*/
+	public $zendRouterDefinition = false;
+
+	/**
 	* Class constructor
 	* @param [integer] $limit - set numbers of elements per page
 	* @param [integer] $page - set current page
 	* @param [integer] $count - number of all items 
 	* @param [integer] $maxItems - set maximum number of items that will be on pagination list 
+	* @param [string] $zendRouterDefinition - definition of Zend_Router definition for paginator URLs
 	* @return [mixed]
 	*/
-	public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9 ){
+	public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9, $zendRouterDefinition = '' ){
 
 		//Initialize validators
 		$intValidator = new Zend_Validate_Int();
@@ -97,6 +104,8 @@ class Main_Paginator
 		$page = (int) $page;
 		$count = (int) $count;
 
+		$this->zendRouterDefinition = $zendRouterDefinition;
+
 		if( $intValidator->isValid($limit) && $intValidator->isValid($page) ){
 			if( $count > 0 ){
 
@@ -108,7 +117,7 @@ class Main_Paginator
 				$this->first['current'] = $firstPage >= $page ? 1 : 0;
 
 				//Define last page
-				$lastPage = (int) round($count/$limit);
+				$lastPage = (int) round($count/$limit) > 0 ? ceil($count/$limit) : 1;
 				$this->last['type'] = 'link';
 				$this->last['page'] = $lastPage;
 				$this->last['title'] = $lastPage;
@@ -147,6 +156,11 @@ class Main_Paginator
 				if( $forTo > $lastPage){
 					$forFrom = $forFrom - ($forTo - $lastPage);
 					$forTo = $lastPage;
+				}
+
+				if( $count < $maxItems ){
+					$forFrom = 1;
+					$forTo = 1;
 				}
 
 				//Define pages list
