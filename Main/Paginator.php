@@ -83,10 +83,9 @@ class Main_Paginator
 	* @param [integer] $page - set current page
 	* @param [integer] $count - number of all items 
 	* @param [integer] $maxItems - set maximum number of items that will be on pagination list 
-	* @param [string] $zendRouterDefinition - definition of Zend_Router definition for paginator URLs
 	* @return [mixed]
 	*/
-	public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9, $zendRouterDefinition = '' ){
+	public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9 ){
 
 		//Initialize validators
 		$intValidator = new Zend_Validate_Int();
@@ -103,8 +102,6 @@ class Main_Paginator
 
 		$page = (int) $page;
 		$count = (int) $count;
-
-		$this->zendRouterDefinition = $zendRouterDefinition;
 
 		if( $intValidator->isValid($limit) && $intValidator->isValid($page) ){
 			if( $count > 0 ){
@@ -153,8 +150,10 @@ class Main_Paginator
 					$forFrom = 1;
 				}
 
-				if( $forTo > $lastPage){
-					$forFrom = $forFrom - ($forTo - $lastPage);
+				if( $forTo > $lastPage ){
+					if( $forTo == $lastPage ){
+						$forFrom = $forFrom - ($forTo - $lastPage);
+					}
 					$forTo = $lastPage;
 				}
 
