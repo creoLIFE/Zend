@@ -40,7 +40,7 @@ class Main_Helper_Params
     public function getParam( $name, $reg = null, $alternative = null ){
     	$param = isset($this->params[ $name ]) && $this->params[ $name ] !== null && $this->params[ $name ] !== '' ? $this->params[ $name ] : ( $alternative !== null ? $alternative : '' );
         if( $reg !== null ){
-            return self::validate( $param ) ? $param : null;
+            return self::validate( $param ) ? $param : false;
         } else {
             return $param;
         }
@@ -55,7 +55,11 @@ class Main_Helper_Params
     * @return [boolean]
     */
     private function validate( $val, $reg ){
-        $validator = new Zend_Validate_Regex(array('pattern' => $reg ));
+        if( !isset($reg['pattern']) ){
+            $reg = array('pattern' => $reg );    
+        }
+
+        $validator = new Zend_Validate_Regex( $reg );
         if ($validator->isValid( $val )) {
             return true;
         } else {
