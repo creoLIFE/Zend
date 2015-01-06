@@ -101,6 +101,9 @@ class Main_Paginator
         //define when script should add break element
         $break = 2;
 
+        if( $limit < 1 ){
+            $limit = 1;
+        }
         if( $maxItems <= 4 ){
             $break = 1;
         }
