@@ -5,7 +5,7 @@
  * @package Main_Paginator
  * @copyright Copyright (c) 2006-2012 creoLIFE
  * @author Mirek Ratman
- * @version 1.1
+ * @version 1.1.2
   */
 
 class Main_Paginator
@@ -75,7 +75,7 @@ class Main_Paginator
 	* Zend_Router definition for paginator URLs
 	* @var [string]
 	*/
-	public $zendRouterDefinition = false;
+	public $zendRouterDefinition = 'paginator-page';
 
 	/**
 	* Class constructor
@@ -85,9 +85,14 @@ class Main_Paginator
 	* @param [integer] $maxItems - set maximum number of items that will be on pagination list 
 	* @return [mixed]
 	*/
-	public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9 ){
+	public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9, $zendRouterDefinition = null ){
 
-		//Initialize validators
+		//Set router definition
+        if( $zendRouterDefinition !== null ){
+            $this->zendRouterDefinition = $zendRouterDefinition;
+        }
+
+        //Initialize validators
 		$intValidator = new Zend_Validate_Int();
 
 		//define when script should add break element
