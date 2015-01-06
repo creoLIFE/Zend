@@ -104,9 +104,6 @@ class Main_Paginator
         if( $maxItems <= 4 ){
             $break = 1;
         }
-        if( $maxItems <= 3 ){
-            $maxItems = 3;
-        }
 
         $page = (int) $page;
         $count = (int) $count;
