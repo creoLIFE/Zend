@@ -101,9 +101,6 @@ class Main_Paginator
         //define when script should add break element
         $break = 2;
 
-        if( $limit < 1 ){
-            $limit = 1;
-        }
         if( $maxItems <= 4 ){
             $break = 1;
         }
@@ -114,7 +111,7 @@ class Main_Paginator
         $page = (int) $page;
         $count = (int) $count;
 
-        if( $intValidator->isValid($limit) && $intValidator->isValid($page) ){
+        if( $intValidator->isValid($limit) && $intValidator->isValid($page) && $limit > 0 ){
             if( $count > 0 ){
 
                 //Define first page
