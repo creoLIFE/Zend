@@ -151,7 +151,7 @@ class Main_Paginator
                 $this->next['current'] = 0;
 
                 $forFrom = $page - round( $maxItems / 2 ) + 1;
-                $forTo = $page + round( $maxItems / 2 ) - 1;
+                $forTo = $page + round( $maxItems / 2 ) - ( round( $maxItems / 2 ) == 1 ? 0 : 1 );
 
                 if( $forFrom < 1 ){
                     $forTo = $forTo + abs($forFrom);
