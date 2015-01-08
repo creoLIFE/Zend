@@ -5,7 +5,7 @@
  * @package Main_Paginator
  * @copyright Copyright (c) 2006-2012 creoLIFE
  * @author Mirek Ratman
- * @version 1.1.3
+ * @version 1.1.4
   */
 
 class Main_Paginator
@@ -119,7 +119,7 @@ class Main_Paginator
                 $this->first['current'] = (int) $firstPage >= $page ? 1 : 0;
 
                 //Define last page
-                $lastPage = (int) round($count/$limit) > 0 ? floor($count/$limit) : 1;
+                $lastPage = (int) round($count/$limit) > 0 ? ceil($count/$limit) : 1;
                 $this->last['type'] = 'link';
                 $this->last['page'] = (int) $lastPage;
                 $this->last['title'] = (string) $lastPage;
@@ -129,6 +129,7 @@ class Main_Paginator
                 $page = $page < 1 ? 1 : ($page >= $lastPage ? $lastPage : $page);
                 $this->current['type'] = 'link';
                 $this->current['page'] = (int) $page;
+                $this->current['realPage'] = (int) $page - 1;
                 $this->current['title'] = (int) $page;
                 $this->current['current'] = 1;
 
@@ -147,7 +148,7 @@ class Main_Paginator
                 $this->next['current'] = 0;
 
                 $forFrom = $page - round( $maxItems / 2 ) + 1;
-                $forTo = $page + round( $maxItems / 2 ) - ( round( $maxItems / 2 ) == 1 ? 0 : 1 );
+                $forTo = $page + round( $maxItems / 2 );
 
                 if( $forFrom < 1 ){
                     $forTo = $forTo + abs($forFrom);
