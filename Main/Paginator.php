@@ -5,7 +5,7 @@
  * @package Main_Paginator
  * @copyright Copyright (c) 2006-2012 creoLIFE
  * @author Mirek Ratman
- * @version 1.1.2
+ * @version 1.1.3
   */
 
 class Main_Paginator
@@ -114,37 +114,36 @@ class Main_Paginator
                 //Define first page
                 $firstPage = 1;
                 $this->first['type'] = 'link';
-                $this->first['page'] = $firstPage;
+                $this->first['page'] = (int) $firstPage;
                 $this->first['title'] = '1';
-                $this->first['current'] = $firstPage >= $page ? 1 : 0;
+                $this->first['current'] = (int) $firstPage >= $page ? 1 : 0;
 
                 //Define last page
-                $lastPage = (int) round($count/$limit) > 0 ? ceil($count/$limit) : 1;
+                $lastPage = (int) round($count/$limit) > 0 ? floor($count/$limit) : 1;
                 $this->last['type'] = 'link';
-                $this->last['page'] = $lastPage;
-                $this->last['title'] = $lastPage;
-                $this->last['current'] = $lastPage <= $page ? 1 : 0;
+                $this->last['page'] = (int) $lastPage;
+                $this->last['title'] = (string) $lastPage;
+                $this->last['current'] = (int) $lastPage <= $page ? 1 : 0;
 
                 //Define current page
                 $page = $page < 1 ? 1 : ($page >= $lastPage ? $lastPage : $page);
                 $this->current['type'] = 'link';
-                $this->current['page'] = $page;
-                $this->current['realPage'] = $page - 1;
-                $this->current['title'] = $page;
+                $this->current['page'] = (int) $page;
+                $this->current['title'] = (int) $page;
                 $this->current['current'] = 1;
 
                 //Define previous page
                 $prev = (int)( $page - 1 < 1 ? 1 : ($page >= $lastPage ? $lastPage - 1 : $page -1) );
                 $this->previous['type'] = 'link';
-                $this->previous['page'] = $prev;
-                $this->previous['title'] = $prev;
+                $this->previous['page'] = (int) $prev;
+                $this->previous['title'] = (int) $prev;
                 $this->previous['current'] = 0;
 
                 //Define next page
                 $next = (int) ($page + 1 > $lastPage ? $lastPage : $page + 1 );
                 $this->next['type'] = 'link';
-                $this->next['page'] = $next;
-                $this->next['link'] = $next;
+                $this->next['page'] = (int) $next;
+                $this->next['link'] = (int) $next;
                 $this->next['current'] = 0;
 
                 $forFrom = $page - round( $maxItems / 2 ) + 1;
@@ -172,7 +171,7 @@ class Main_Paginator
                     $list['type'] = 'link';
                     $list['page'] = (int) $i;
                     $list['title'] = $i;
-                    $list['current'] = $i == $page ? 1 : 0;
+                    $list['current'] = (int) $i == $page ? 1 : 0;
                     $this->pages[] = $list;
                 }
 
