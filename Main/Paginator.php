@@ -88,7 +88,7 @@ class Main_Paginator
     * @param [integer] $maxItems - set maximum number of items that will be on pagination list 
     * @return [mixed]
     */
-    public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9, array $zendRouterDefinition ){
+    public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9, array $zendRouterDefinition  = array() ){
 
         //Set router definition
         if( count( $zendRouterDefinition ) > 0 ){
