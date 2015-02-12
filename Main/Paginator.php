@@ -5,208 +5,213 @@
  * @package Main_Paginator
  * @copyright Copyright (c) 2006-2012 creoLIFE
  * @author Mirek Ratman
- * @version 1.1
+ * @version 1.1.4
   */
 
 class Main_Paginator
 {
 
-	/**
-	* Current element
-	* @var [integer]
-	*/
-	public $current;
+    /**
+    * Current element
+    * @var [integer]
+    */
+    public $current;
 
-	/**
-	* First element
-	* @var [integer]
-	*/
-	public $first;
+    /**
+    * First element
+    * @var [integer]
+    */
+    public $first;
 
-	/**
-	* Last element
-	* @var [integer]
-	*/
-	public $last;
+    /**
+    * Last element
+    * @var [integer]
+    */
+    public $last;
 
-	/**
-	* Previous element
-	* @var [integer]
-	*/
-	public $previous;
+    /**
+    * Previous element
+    * @var [integer]
+    */
+    public $previous;
 
-	/**
-	* Next element
-	* @var [integer]
-	*/
-	public $next;
+    /**
+    * Next element
+    * @var [integer]
+    */
+    public $next;
 
-	/**
-	* Status indicator. False if no pages found of page outside defined range
-	* @var [boolean]
-	*/
-	public $status = false;
+    /**
+    * Status indicator. False if no pages found of page outside defined range
+    * @var [boolean]
+    */
+    public $status = false;
 
-	/**
-	* List of pages
-	* @var [array]
-	*/
-	public $pages;
+    /**
+    * List of pages
+    * @var [array]
+    */
+    public $pages;
 
-	/**
-	* count of all pages
-	* @var [integer]
-	*/
-	public $countAll;
+    /**
+    * count of all pages
+    * @var [integer]
+    */
+    public $countAll;
 
-	/**
-	* count of pages
-	* @var [integer]
-	*/
-	public $countPages;
+    /**
+    * count of pages
+    * @var [integer]
+    */
+    public $countPages;
 
-	/**
-	* go to page functionality
-	* @var [boolean]
-	*/
-	public $goToPage = false;
+    /**
+    * go to page functionality
+    * @var [boolean]
+    */
+    public $goToPage = false;
 
-	/**
-	* Zend_Router definition for paginator URLs
-	* @var [string]
-	*/
-	public $zendRouterDefinition = false;
+    /**
+    * Zend_Router definition for paginator URLs
+    * @var [string]
+    */
+    public $zendRouterDefinition = array(
+        'page' => 'paginator-page',
+        'search' => 'paginator-search'
+    );
 
-	/**
-	* Class constructor
-	* @param [integer] $limit - set numbers of elements per page
-	* @param [integer] $page - set current page
-	* @param [integer] $count - number of all items 
-	* @param [integer] $maxItems - set maximum number of items that will be on pagination list 
-	* @return [mixed]
-	*/
-	public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9 ){
+    /**
+    * Class constructor
+    * @param [integer] $limit - set numbers of elements per page
+    * @param [integer] $page - set current page
+    * @param [integer] $count - number of all items 
+    * @param [integer] $maxItems - set maximum number of items that will be on pagination list 
+    * @return [mixed]
+    */
+    public function __construct( $limit = 1, $page = 0, $count = 0, $maxItems = 9, array $zendRouterDefinition  = array() ){
 
-		//Initialize validators
-		$intValidator = new Zend_Validate_Int();
+        //Set router definition
+        if( count( $zendRouterDefinition ) > 0 ){
+            $this->zendRouterDefinition = $zendRouterDefinition;
+        }
 
-		//define when script should add break element
-		$break = 2;
+        //Initialize validators
+        $intValidator = new Zend_Validate_Int();
 
-		if( $maxItems <= 4 ){
-			$break = 1;
-		}
-		if( $maxItems <= 3 ){
-			$maxItems = 3;
-		}
+        //define when script should add break element
+        $break = 2;
 
-		$page = (int) $page;
-		$count = (int) $count;
+        if( $maxItems <= 4 ){
+            $break = 1;
+        }
 
-		if( $intValidator->isValid($limit) && $intValidator->isValid($page) ){
-			if( $count > 0 ){
+        $page = (int) $page;
+        $count = (int) $count;
 
-				//Define first page
-				$firstPage = 1;
-				$this->first['type'] = 'link';
-				$this->first['page'] = $firstPage;
-				$this->first['title'] = '1';
-				$this->first['current'] = $firstPage >= $page ? 1 : 0;
+        if( $intValidator->isValid($limit) && $intValidator->isValid($page) && $limit > 0 ){
+            if( $count > 0 ){
 
-				//Define last page
-				$lastPage = (int) round($count/$limit) > 0 ? ceil($count/$limit) : 1;
-				$this->last['type'] = 'link';
-				$this->last['page'] = $lastPage;
-				$this->last['title'] = $lastPage;
-				$this->last['current'] = $lastPage <= $page ? 1 : 0;
+                //Define first page
+                $firstPage = 1;
+                $this->first['type'] = 'link';
+                $this->first['page'] = (int) $firstPage;
+                $this->first['title'] = '1';
+                $this->first['current'] = (int) $firstPage >= $page ? 1 : 0;
 
-				//Define current page
-				$page = $page < 1 ? 1 : ($page >= $lastPage ? $lastPage : $page);
-				$this->current['type'] = 'link';
-				$this->current['page'] = $page;
-				$this->current['realPage'] = $page - 1;
-				$this->current['title'] = $page;
-				$this->current['current'] = 1;
+                //Define last page
+                $lastPage = (int) round($count/$limit) > 0 ? ceil($count/$limit) : 1;
+                $this->last['type'] = 'link';
+                $this->last['page'] = (int) $lastPage;
+                $this->last['title'] = (string) $lastPage;
+                $this->last['current'] = (int) $lastPage <= $page ? 1 : 0;
 
-				//Define previous page
-				$prev = (int)( $page - 1 < 1 ? 1 : ($page >= $lastPage ? $lastPage - 1 : $page -1) );
-				$this->previous['type'] = 'link';
-				$this->previous['page'] = $prev;
-				$this->previous['title'] = $prev;
-				$this->previous['current'] = 0;
+                //Define current page
+                $page = $page < 1 ? 1 : ($page >= $lastPage ? $lastPage : $page);
+                $this->current['type'] = 'link';
+                $this->current['page'] = (int) $page;
+                $this->current['realPage'] = (int) $page - 1;
+                $this->current['title'] = (int) $page;
+                $this->current['current'] = 1;
 
-				//Define next page
-				$next = (int) ($page + 1 > $lastPage ? $lastPage : $page + 1 );
-				$this->next['type'] = 'link';
-				$this->next['page'] = $next;
-				$this->next['link'] = $next;
-				$this->next['current'] = 0;
+                //Define previous page
+                $prev = (int)( $page - 1 < 1 ? 1 : ($page >= $lastPage ? $lastPage - 1 : $page -1) );
+                $this->previous['type'] = 'link';
+                $this->previous['page'] = (int) $prev;
+                $this->previous['title'] = (int) $prev;
+                $this->previous['current'] = 0;
 
-				$forFrom = $page - round( $maxItems / 2 ) + 1;
-				$forTo = $page + round( $maxItems / 2 ) - 1;
+                //Define next page
+                $next = (int) ($page + 1 > $lastPage ? $lastPage : $page + 1 );
+                $this->next['type'] = 'link';
+                $this->next['page'] = (int) $next;
+                $this->next['link'] = (int) $next;
+                $this->next['current'] = 0;
 
-				if( $forFrom < 1 ){
-					$forTo = $forTo + abs($forFrom);
-					$forFrom = 1;
-				}
+                $forFrom = $page - round( $maxItems / 2 ) + 1;
+                $forTo = $page + round( $maxItems / 2 );
 
-				if( $forTo > $lastPage ){
-					if( $forTo == $lastPage ){
-						$forFrom = $forFrom - ($forTo - $lastPage);
-					}
-					$forTo = $lastPage;
-				}
+                if( $forFrom < 1 ){
+                    $forTo = $forTo + abs($forFrom);
+                    $forFrom = 1;
+                }
 
-				if( $count < $maxItems ){
-					$forFrom = 1;
-					$forTo = 1;
-				}
+                if( $forTo > $lastPage ){
+                    if( $forTo == $lastPage ){
+                        $forFrom = $forFrom - ($forTo - $lastPage);
+                    }
+                    $forTo = $lastPage;
+                }
 
-				//Define pages list
-				for( $i = $forFrom; $i <= $forTo; $i++ ){
-					$list['type'] = 'link';
-					$list['page'] = (int) $i;
-					$list['title'] = $i;
-					$list['current'] = $i == $page ? 1 : 0;
-					$this->pages[] = $list;
-				}
+                if( $count < $maxItems ){
+                    $forFrom = 1;
+                    $forTo = 1;
+                }
 
-				//Define break page
-				$pageBreak['type'] = 'break';
-				$pageBreak['page'] = '';
-				$pageBreak['title'] = '..';
-				$pageBreak['current'] = 0;
+                //Define pages list
+                for( $i = $forFrom; $i <= $forTo; $i++ ){
+                    $list['type'] = 'link';
+                    $list['page'] = (int) $i;
+                    $list['title'] = $i;
+                    $list['current'] = (int) $i == $page ? 1 : 0;
+                    $this->pages[] = $list;
+                }
 
-				if( $page > round( $maxItems / 2 ) ){
-					$ta = array_slice($this->pages, -1 * $limit + 3);
-					unset($this->pages);
-					$this->pages = array_merge( array($this->first), array($pageBreak), $ta );
-				}
+                //Define break page
+                $pageBreak['type'] = 'break';
+                $pageBreak['page'] = '';
+                $pageBreak['title'] = '..';
+                $pageBreak['current'] = 0;
 
-				if( $page < $lastPage - round( $maxItems / 2 ) ){
-					$ta = array_slice($this->pages, 0, $limit - 3);
-					unset($this->pages);
-					$this->pages = array_merge( $ta, array($pageBreak), array($this->last) );
-				}
+                if( $page > round( $maxItems / 2 ) ){
+                    $ta = array_slice($this->pages, -1 * $limit + 3);
+                    unset($this->pages);
+                    $this->pages = array_merge( array($this->first), array($pageBreak), $ta );
+                }
 
-				//Define count of all pages
-				$this->countAll = $forTo;
-				
-				//Define count of displayed pages
-				$this->countPages = count($this->pages);
+                if( $page < $lastPage - round( $maxItems / 2 ) ){
+                    $ta = array_slice($this->pages, 0, $limit - 3);
+                    unset($this->pages);
+                    $this->pages = array_merge( $ta, array($pageBreak), array($this->last) );
+                }
 
-				//Update status
-				if( count($count) > 0 ){
-					$this->status = 1;
-				}
-				if( $page > $lastPage ){
-					$this->status = 0;
-				}
+                //Define count of all pages
+                $this->countAll = $forTo;
+                
+                //Define count of displayed pages
+                $this->countPages = count($this->pages);
 
-			}
-		}
-		else{
-			return false;
-		}
-	}
+                //Update status
+                if( count($count) > 0 ){
+                    $this->status = 1;
+                }
+                if( $page > $lastPage ){
+                    $this->status = 0;
+                }
+
+            }
+        }
+        else{
+            return false;
+        }
+    }
 }
