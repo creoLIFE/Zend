@@ -48,7 +48,7 @@ class Main_Io
 			if( !is_dir( $currentFolder ) ){
                 exec( 'mkdir -m '. $chmod .' '. $currentFolder, $o, $status );
 
-                if( !$status ) ){
+                if( !$status ){
                     return false;
                 }
 			}
