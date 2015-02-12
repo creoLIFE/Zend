@@ -46,9 +46,10 @@ class Main_Io
 		for( $x = 0; $x < count( $dirs ); $x++){
 			$currentFolder .= $dirs[$x].'/';
 			if( !is_dir( $currentFolder ) ){
-				if( !mkdir( $currentFolder, $chmod ) ){
-					return false;
-				}
+                exec( 'mkdir -m '. $chmod .' '. $currentFolder, $o, $status );
+                if( !$status ) ){
+                    return false;
+                }
 			}
 		}
 	
