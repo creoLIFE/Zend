@@ -85,6 +85,25 @@ class Main_Io
 		return $out;
 	}
 
+    /**
+     * Method read file
+     * @method readFile
+     * @param string $filename - name of file
+     * @return string
+     */
+    public static function readFile($filename = null)
+    {
+        if( self::fileExists($filename) )
+        {
+            $handle = fopen($filename, "r");
+            $contents = fread($handle, ( filesize($filename) == 0 ? 1 : filesize($filename) ) );
+            fclose($handle);
+
+            return $contents;
+        }
+        else
+            return false;
+    }
 
     /**
      * Method create file and call for create directory structure if needed 
