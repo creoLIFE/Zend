@@ -3,8 +3,8 @@
  * class Main_Io
  * Class provide extended I/O functionality
  * @category Main
- * @package Main_Paginator
- * @copyright Copyright (c) 2006-2012 creoLIFE
+ * @package Main_Io
+ * @copyright Copyright (c) 2006-2015 creoLIFE
  * @author Mirek Ratman
  * @version 1.1
  */
@@ -14,7 +14,6 @@ class Main_Io
 
 	/**
 	* Method will check if file name exists
-	* @method fileExists
     * @param string $filename - name of file
 	* @return boolean
 	*/
@@ -28,7 +27,6 @@ class Main_Io
 
     /**
      * Method create a directory with subdirectores if needed 
-     * @method makeDir
      * @param string $dirname - name of directory
      * @param string $chmod - directory attributes
 	 * @param string $recursive - to make folders recursively (future)
@@ -60,7 +58,6 @@ class Main_Io
 
     /**
      * Method read all entries from directory except .htaccess
-     * @method makeDir
      * @param string $dirname - name of directory
 	 * @return mixed - list of directories
      */
@@ -86,8 +83,7 @@ class Main_Io
 	}
 
     /**
-     * Method read file
-     * @method readFile
+     * Method will read file
      * @param string $filename - name of file
      * @return string
      */
@@ -107,7 +103,6 @@ class Main_Io
 
     /**
      * Method create file and call for create directory structure if needed 
-     * @method writeFile
      * @param string $filename - name of file
      * @param string $content - content to be written in to file
      * @param string $chmod - file attributes
@@ -140,7 +135,6 @@ class Main_Io
 
     /**
      * Method read and parse CSV file to array
-     * @method writeFile
      * @param string $filename - name of file
      * @param string $glue - delimeter character
 	 * @param string $firstLineDesc - define if first line of CSV file is description
@@ -177,7 +171,6 @@ class Main_Io
 
     /**
      * Method create CSV file based on gived description and data
-     * @method writeFile
      * @param string $filename - name of file to be created
 	 * @param array $data - define data array
      * @param array $description - define description array
@@ -211,7 +204,6 @@ class Main_Io
 
     /**
      * Method create CSV file based on gived description and data
-     * @method writeBigCSV
      * @param string $filename - name of file to be created
      * @param array $data - define data array
      * @param array $description - define description array
@@ -252,7 +244,6 @@ class Main_Io
 
 	/**
 	* Add line to file
-	* @method addLineToFile
     * @param string filename - name of file
     * @param string content - string that will be added to file
     * @param string $chmod - file attributes
@@ -283,7 +274,6 @@ class Main_Io
 
 	/**
 	* backup existing file
-	* @method backupFile
     * @param string filename - name of file
 	* @return boolean
 	*/
@@ -304,7 +294,6 @@ class Main_Io
 
 	/**
 	* Get information about file
-	* @method getFileInfo
     * @param string filename - name of file
 	* @return boolean
 	*/
