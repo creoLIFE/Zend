@@ -318,5 +318,19 @@ class Main_Io
         }
 	}
 
+    /**
+     * Get binary file as base64
+     * @param string filename - name of file
+     * @return boolean
+     */
+    public function getFileAsBase64( $filename = null ){
+        if( self::fileExists( $filename ) ){
+            //set defaults
+            return base64_encode( file_get_contents( $filename ) );
+        }
+        else{
+            return false;
+        }
+    }
 
 }
