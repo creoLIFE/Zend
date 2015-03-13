@@ -17,7 +17,7 @@ class Main_Io
     * @param string $filename - name of file
 	* @return boolean
 	*/
-    static public function fileExists( $filename ){
+    public static function fileExists( $filename ){
 		if( $filename !== null && file_exists( $filename ) && !is_dir( $filename ) ){
 			return true;
 		}
@@ -32,7 +32,7 @@ class Main_Io
 	 * @param string $recursive - to make folders recursively (future)
      * @return boolean
      */
-    static public function makeDir( $dirname, $chmod = '0777', $recursive = true ){
+    public static function makeDir( $dirname, $chmod = '0777', $recursive = true ){
 		if( is_null($dirname) || is_dir( $dirname) || $dirname === "/" || file_exists( $dirname ) ){
 			return false;
 		}
@@ -61,7 +61,7 @@ class Main_Io
      * @param string $dirname - name of directory
 	 * @return mixed - list of directories
      */
-    static public function readDirectory( $dirname ){
+    public static function readDirectory( $dirname ){
 		if( is_null($dirname) || is_file( $dirname) || $dirname === "/" ){
 			return false;
 		}
@@ -140,7 +140,7 @@ class Main_Io
 	 * @param string $firstLineDesc - define if first line of CSV file is description
      * @return mixed - csv data
      */
-	static public function readCSV( $filename, $glue = ',', $firstLineDesc = true ){
+	public static function readCSV( $filename, $glue = ',', $firstLineDesc = true ){
 		if( self::fileExists( $filename ) ){
 			try{
 				$out = new Main_Response_Csv();
@@ -179,7 +179,7 @@ class Main_Io
      * @param string $mode - file operation mode
      * @return boolean
      */
-	static public function writeCSV( $filename, $data, $description = false, $glue = ',', $chmod = '0777', $mode = 'w+' ){
+	public static function writeCSV( $filename, $data, $description = false, $glue = ',', $chmod = '0777', $mode = 'w+' ){
 		if( $description && count($description) !== count($data[0]) ){
 			throw new exception( 'number of elements from description array is different to number of elements from data array !' );
 			return false;
@@ -213,7 +213,7 @@ class Main_Io
      * @param string $memorySize - size of memory that will be used durring temp file create
      * @return boolean
      */
-    static public function writeBigCSV( $filename, $data, $description = false, $glue = ',', $chmod = '0777', $mode = 'w+', $memorySize = 50 ){
+    public static function writeBigCSV( $filename, $data, $description = false, $glue = ',', $chmod = '0777', $mode = 'w+', $memorySize = 50 ){
         if( $description && count($description) !== count($data[0]) ){
             throw new exception( 'number of elements from description array is different to number of elements from data array !' );
             return false;
@@ -249,7 +249,7 @@ class Main_Io
     * @param string $chmod - file attributes
 	* @return boolean
 	*/
-	public function addLineToFile( $filename = null, $content = null, $chmod = '0777' ){
+	public static function addLineToFile( $filename = null, $content = null, $chmod = '0777' ){
 		$dir = substr( $filename, 0, strrpos($filename,'/') );
 		if( !is_dir( $dir ) ){
 			self::makeDir( $dir, $chmod );
@@ -277,7 +277,7 @@ class Main_Io
     * @param string filename - name of file
 	* @return boolean
 	*/
-	public function backupFile( $filename = null, $mainBackup = true, $extendedBackup = false, $backupExt = '.bak' ){
+	public static function backupFile( $filename = null, $mainBackup = true, $extendedBackup = false, $backupExt = '.bak' ){
         if( self::fileExists( $filename ) ){
             if( $mainBackup ){
                 copy( $filename, $filename . $backupExt );
@@ -297,7 +297,7 @@ class Main_Io
     * @param string filename - name of file
 	* @return boolean
 	*/
-	public function getFileInfo( $filename = null ){
+	public static function getFileInfo( $filename = null ){
         if( self::fileExists( $filename ) ){
             //set defaults
             return stat( $filename );
@@ -312,7 +312,7 @@ class Main_Io
      * @param string filename - name of file
      * @return boolean
      */
-    public function getFileAsBase64( $filename = null ){
+    public static function getFileAsBase64( $filename = null ){
         if( self::fileExists( $filename ) ){
             //set defaults
             return base64_encode( file_get_contents( $filename ) );
