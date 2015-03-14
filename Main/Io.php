@@ -121,11 +121,11 @@ class Main_Io
 		unset($dir,$file);
 
 		if( !is_dir( $pathtofile ) ){
-			$f = @fopen( $pathtofile, $mode );
+			$f = fopen( $pathtofile, $mode );
 
 			if( $f ){
-				@fwrite($f, $content);
-				@fclose($f);
+				fwrite($f, $content);
+				fclose($f);
 			}
 			return true;
 		}
@@ -144,9 +144,9 @@ class Main_Io
 		if( self::fileExists( $filename ) ){
 			try{
 				$out = new Main_Response_Csv();
-				if( ($handle = @fopen($filename, "r")) !== FALSE ){
+				if( ($handle = fopen($filename, "r")) !== FALSE ){
 					$line = 0;
-					while( ($data = @fgetcsv($handle, 5000, $glue)) !== FALSE ){
+					while( ($data = fgetcsv($handle, 5000, $glue)) !== FALSE ){
 						if( $line === 0 && $firstLineDesc === true ){
 							$out->description = $data;
 						}
@@ -156,7 +156,7 @@ class Main_Io
 						$line++;
 					}
 
-					@fclose($handle);
+					fclose($handle);
 					$out->dataCount = count($out->data);
 					return $out;
 				}
@@ -260,11 +260,11 @@ class Main_Io
 		unset($dir,$file);
 
 		if( !is_dir( $pathtofile ) ){
-			$f = @fopen( $pathtofile, 'a+');
+			$f = fopen( $pathtofile, 'a+');
 
 			if( $f ){
-				@fwrite($f, $content);
-				@fclose($f);
+				fwrite($f, $content);
+				fclose($f);
 			}
 			return true;
 		}
